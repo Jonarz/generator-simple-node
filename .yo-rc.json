@@ -1,0 +1,9 @@
+{
+  "generator-node": {
+    "promptValues": {
+      "authorName": "Jonathan Ramirez",
+      "authorEmail": "ramirez.jonathan18@gmail.com",
+      "authorUrl": ""
+    }
+  }
+}
