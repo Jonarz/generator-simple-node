@@ -6,22 +6,18 @@ module.exports = {
   // },
 
   development: {
-    database: 'books',
+    database: 'dev_db',
     username: 'postgres',
     password: null,
     host: 'localhost',
     dialect: 'postgres'
   },
-
   test: {
-    database: 'book_test',
+    database: 'test_db',
     username: 'postgres',
     password: null,
     host: 'localhost',
-    dialect: 'postgres',
-    define: {
-      timestamps: true
-   }
+    dialect: 'postgres'
   },
 
   production: {
