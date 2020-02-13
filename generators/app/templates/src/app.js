@@ -1,5 +1,6 @@
 import config from 'dotenv';
 config.config();
+import morgan from 'morgan';
 import express from 'express';
 import authUtils from './utils/AuthUtils';
 /* ROUTES IMPORT */
@@ -11,6 +12,7 @@ const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(morgan(':method :url :status :res[content-length] - :response-time ms'));
 
 const port = process.env.PORT || 3009;
 /*
