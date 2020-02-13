@@ -19,13 +19,13 @@ module.exports = class extends Generator {
       {
         type: "input",
         name: "fieldName",
-        message: "Select you field name",
+        message: "Select your field name",
         default: "field"
       },
       {
         type: "list",
         name: "fieldType",
-        message: "Select you field type",
+        message: "Select your field type",
         default: "string",
         choices: choices
       },
@@ -57,8 +57,6 @@ module.exports = class extends Generator {
   }
 
   writing() {
-    console.log(this.columns);
-
     let controllerName = `${this.options.modelname}Controller`;
     let serviceName = `${this.options.modelname}Service`;
     let routerName = `${this.options.modelname}Routes`;
