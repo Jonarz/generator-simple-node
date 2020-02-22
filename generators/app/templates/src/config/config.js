@@ -1,30 +1,28 @@
-module.exports = {
+import dotenv from "dotenv";
+dotenv.config();
 
-  // If using onine database
-  // development: {
-  //   use_env_variable: 'DATABASE_URL'
-  // },
-
-  development: {
-    database: 'dev_db',
-    username: 'postgres',
-    password: null,
-    host: 'localhost',
-    dialect: 'postgres'
+/**
+ * App environment configurations
+ */
+export default {
+  app: {
+    port: process.env.PORT,
+    environment: process.env.NODE_ENV
   },
-  test: {
-    database: 'test_db',
-    username: 'postgres',
-    password: null,
-    host: 'localhost',
-    dialect: 'postgres'
+  jwt: {
+    tokenSecret: process.env.ACCESS_TOKEN_SECRET,
+    refreshTokenSecret: process.env.REFRESH_TOKEN_SECRET,
+    expirationTime: process.env.TOKEN_EXPIRATION_TIME
   },
-
-  production: {
-    database: process.env.DB_NAME,
-    username: process.env.DB_USER,
+  database: {
+    name: process.env.DB_NAME,
+    user: process.env.DB_USER,
     password: process.env.DB_PASS,
-    host: process.env.DB_HOST,
-    dialect: 'postgres'
+    port: process.env.DB_PORT,
+    host: process.env.DB_HOST
+  },
+  logger: {
+    levelDev: process.env.LOGGER_LEVEL_DEV,
+    levelProd: process.env.LOGGER_LEVEL_PROD
   }
 };
