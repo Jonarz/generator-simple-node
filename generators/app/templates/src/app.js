@@ -39,7 +39,7 @@ app.get("*", (req, res) =>
 );
 
 app.listen(port, () => {
-  logger.info("Server is running on PORT" + config.app.port);
+  logger.info("Server is running on PORT: " + config.app.port);
   logger.info("Environment: " + config.app.environment);
 });
 
