@@ -1,21 +1,22 @@
 "use strict";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import config from "../config/config";
 
 export default class AuthUtils {
-
   static async generatePasswordHash(password) {
     const saltRounds = 10;
-    const hash = await bcrypt.hash(password, saltRounds);
+    const pswd = escape(password);
+    const hash = await bcrypt.hash(pswd, saltRounds);
     if (hash) {
       return hash;
     }
-
     return null;
   }
 
   static async checkPassword(password, hash) {
-    const match = await bcrypt.compare(password.toString(), hash.toString());
+    const pswd = escape(password);
+    const match = await bcrypt.compare(pswd, hash.toString());
     if (match) {
       return true;
     }
@@ -27,8 +28,8 @@ export default class AuthUtils {
       id: user.id,
       username: user.username
     };
-    let accesToken = jwt.sign(plainJsonUser, process.env.ACCESS_TOKEN_SECRET, {
-      expiresIn: "24h"
+    let accesToken = jwt.sign(plainJsonUser, config.jwt.tokenSecret, {
+      expiresIn: config.jwt.expirationTime
     });
     return accesToken;
   }
@@ -40,7 +41,7 @@ export default class AuthUtils {
       return res.sendStatus(401);
     }
 
-    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
+    jwt.verify(token, config.jwt.tokenSecret, (err, user) => {
       if (err) {
         return res.sendStatus(403);
       }
@@ -50,7 +51,7 @@ export default class AuthUtils {
   }
 
   static basicauth(user) {
-    let accesToken = jwt.sign(user.username, process.env.ACCESS_TOKEN_SECRET);
+    let accesToken = jwt.sign(user.username, config.jwt.tokenSecret);
     return accesToken;
   }
 }

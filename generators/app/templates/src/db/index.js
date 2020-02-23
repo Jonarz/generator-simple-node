@@ -1,28 +1,23 @@
 import fs from "fs";
 import path from "path";
 import Sequelize from "sequelize";
-import configJson from "../config/config";
+import config from "../config/config";
+import constants from "../config/constants";
 
 const basename = path.join(__dirname, "../models");
-
-const env = process.env.NODE_ENV ? process.env.NODE_ENV : "development";
-
-const config = configJson[env];
-
-console.log("this is the environment: ", env);
-
 const db = {};
 
 let sequelize;
-if (config.environment === "production") {
+// Production configuration
+if (config.app.environment === constants.PRODUCTION) {
   sequelize = new Sequelize(
-    process.env.DB_NAME,
-    process.env.DB_USER,
-    process.env.DB_PASS,
+    config.database.name,
+    config.database.user,
+    config.database.password,
     {
-      host: process.env.DB_HOST,
-      port: process.env.DB_PORT,
-      dialect: "postgres",
+      host: config.database.host,
+      port: config.database.port,
+      dialect: constants.DATABASES.POSTGRES,
       dialectOption: {
         ssl: true,
         native: true
@@ -31,12 +26,13 @@ if (config.environment === "production") {
     }
   );
 } else {
-   sequelize = new Sequelize(
-    config.database,
-    config.username,
-    config.password,
+  // Developement configuration
+  sequelize = new Sequelize(
+    config.database.name,
+    config.database.user,
+    config.database.password,
     {
-      dialect: "sqlite",
+      dialect: constants.DATABASES.SQLITE,
       storage: ":memory",
       dialectOption: {
         ssl: true,
