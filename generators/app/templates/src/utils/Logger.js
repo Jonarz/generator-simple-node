@@ -4,7 +4,7 @@ import constants from "../config/constants";
 export const logger = configureWinstonLogger();
 
 function configureWinstonLogger() {
-  if (envConfig.nodejs.environment === constants.PRODUCTION) {
+  if (config.app.environment === constants.PRODUCTION) {
     // production log configuration
     loggerOptions = {
       transports: [
