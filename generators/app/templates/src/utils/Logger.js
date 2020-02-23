@@ -19,7 +19,7 @@ function configureWinstonLogger() {
       )
     };
   } else {
-    // developement log configuration
+    // development log configuration
     loggerOptions = {
       transports: [
         new winston.transports.Console({ level: config.logger.levelDev })
