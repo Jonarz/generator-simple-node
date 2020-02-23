@@ -3,7 +3,7 @@
  */
 export default {
   PRODUCTION: "production",
-  DEVELOPEMENT: "developement",
+  DEVELOPMENT: "development",
   DATABASES: {
     MYSQL: "mysql",
     POSTGRES: "postgres",
