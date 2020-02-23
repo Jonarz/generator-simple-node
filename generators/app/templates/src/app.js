@@ -8,7 +8,7 @@ import userRouter from "./routes/UserRoutes";
 import authRoutes from "./routes/AuthRoutes";
 import database from "../src/db/index";
 
-const port = config.nodejs.port || 3009;
+const port = config.app.port || 3009;
 const app = express();
 
 app.use(express.json());
