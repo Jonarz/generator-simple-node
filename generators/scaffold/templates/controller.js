@@ -20,10 +20,12 @@ class <%= controllername %>  {
   }
 
   static async addOne(req, res) {
-    if (!req.body.title || !req.body.price || !req.body.description) {
+    <% if(fieldsRequiered.length != 0){%>
+    if (<% fieldsRequiered.forEach( (field,index) => {%>!req.body.<%=field.fieldName%><% if(index != fieldsRequiered.length -1){%> || <%}%><%})%>) {
       util.setError(400, 'Please provide complete details');
       return util.send(res);
     }
+    <%}%>
     const new<%= modelname %>  = req.body;
     try {
       const created<%= modelname %>  = await <%= servicename %>.addOne(new<%= modelname %> );

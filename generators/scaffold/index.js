@@ -61,7 +61,6 @@ module.exports = class extends Generator {
     let serviceName = `${this.options.modelname}Service`;
     let routerName = `${this.options.modelname}Routes`;
 
-
     this.fs.copyTpl(
       this.templatePath("model.js"),
       this.destinationPath(`src/models/${this.options.modelname}.js`),
@@ -79,6 +78,7 @@ module.exports = class extends Generator {
       {
         modelname: this.options.modelname,
         fields: this.columns,
+        fieldsRequiered: this.columns.filter(f => !f.allowNull),
         controllername: controllerName,
         servicename: serviceName,
         routername: routerName
