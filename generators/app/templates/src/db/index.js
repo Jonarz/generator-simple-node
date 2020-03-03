@@ -1,43 +1,37 @@
 import fs from "fs";
 import path from "path";
 import Sequelize from "sequelize";
-import config from "../config/config";
+import db_config from "./config";
+import global_config from "../config/config";
 import constants from "../config/constants";
-
 const basename = path.join(__dirname, "../models");
 const db = {};
 
 let sequelize;
 // Production configuration
-if (config.app.environment === constants.PRODUCTION) {
+if (global_config.app.environment === constants.PRODUCTION) {
   sequelize = new Sequelize(
-    config.database.name,
-    config.database.user,
-    config.database.password,
+    db_config.production.database,
+    db_config.production.username,
+    db_config.production.password,
     {
-      host: config.database.host,
-      port: config.database.port,
-      dialect: constants.DATABASES.POSTGRES,
-      dialectOption: {
-        ssl: true,
-        native: true
-      },
+      host: db_config.production.host,
+      port: db_config.production.port,
+      dialect: db_config.production.dialect,
+      dialectOption: db_config.production.dialectOption,
       logging: true
     }
   );
 } else {
   // Developement configuration
   sequelize = new Sequelize(
-    config.database.name,
-    config.database.user,
-    config.database.password,
+    db_config.development.database,
+    db_config.development.username,
+    db_config.development.password,
     {
-      dialect: constants.DATABASES.SQLITE,
-      storage: ":memory",
-      dialectOption: {
-        ssl: true,
-        native: true
-      }
+      dialect: db_config.development.dialect,
+      storage: db_config.development.storage,
+      dialectOption: db_config.development.dialectOption
     }
   );
 }
