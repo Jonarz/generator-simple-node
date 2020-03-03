@@ -6,7 +6,12 @@
   "scripts": {
     "dev": "nodemon --exec babel-node ./src/app.js",
     "build": "rm -rf ./build && babel -d ./build ./src -s",
-    "db:migrate": "npx sequelize-cli db:migrate"
+    "db:migrate": "npx sequelize-cli db:migrate",
+    "test": "export NODE_ENV=test &&  npx sequelize db:migrate:undo:all  && npx sequelize db:migrate  && nyc --require @babel/register  mocha ./test/users.js --timeout 20000 --exit",
+    "generate-lcov": "nyc report --reporter=text-lcov > lcov.info",
+    "coveralls-coverage": "coveralls < lcov.info",
+    "codeclimate-coverage": "codeclimate-test-reporter < lcov.info",
+    "coverage": "nyc npm test && npm run generate-lcov && npm run coveralls-coverage && npm run codeclimate-coverage"
   },
   "keywords": [],
   "author": "",
@@ -39,7 +44,9 @@
     "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-plugin-import": "^2.20.1",
-    "mocha": "^7.0.1"
+    "mocha": "^7.0.1",
+    "nyc": "^15.0.0",
+    "codeclimate-test-reporter": "^0.5.1"
   },
   "engines": {
     "npm": ">= 6.0.0",
