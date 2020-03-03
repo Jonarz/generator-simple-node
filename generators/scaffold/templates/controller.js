@@ -67,7 +67,7 @@ class <%= controllername %>  {
     }
 
     try {
-      const the<%= modelname %>  = await <%= servicename %>.get(id);
+      const the<%= modelname %>  = await <%= servicename %>.getOne(id);
 
       if (!the<%= modelname %> ) {
         util.setError(404, `Cannot find <%= modelname %>  with the id ${id}`);
