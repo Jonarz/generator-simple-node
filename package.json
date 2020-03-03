@@ -1,6 +1,6 @@
 {
   "name": "generator-simple-node",
-  "version": "1.0.0",
+  "version": "0.5.0",
   "description": "NodeJs API generator",
   "homepage": "",
   "author": {
@@ -20,7 +20,13 @@
     "jwt",
     "scaffold",
     "posgresql",
-    "yeoman-generator"
+    "yeoman-generator",
+    "api",
+    "simple",
+    "rest",
+    "chai",
+    "jsonwebtoken",
+    "chai"
   ],
   "devDependencies": {
     "yeoman-test": "^1.7.0",
